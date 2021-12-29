@@ -1,13 +1,61 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+::selection {
+  background: #ec005b;
+  color: white;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/* disabled since tailwind JIT mode does not allow @apply directive */
+
+/* :root {
+  @apply light;
+}  */
+
+.dark {
+  --color-bg-primary: #29374b;
+  --color-bg-secondary: #3f5169;
+  --color-bg-tertiary: #f3f3f3;
+  --color-bg-accent: #6461af;
+  --color-text-primary: #f7fafc;
+  --color-text-secondary: #e2e8f0;
+  --color-text-accent: #A5B4FC;
+}
+
+.light {
+  --color-bg-primary: #fcfcfc;
+  --color-bg-secondary: #f3f2f2;
+  --color-bg-accent: #9692df;
+  --color-text-primary: #1F2937;
+  --color-text-secondary: #9CA3AF;
+  --color-text-accent: #4F46E5;
+}
+
+/* Transitions */
+
+.fade-appear{
+  opacity:0;
+  z-index:1
+}
+
+.fade-appear.fade-appear-active{
+  opacity:1;
+  transition: opacity 300ms linear
+}
+
+.fade-exit {
+  -webkit-transform: translate(-50%, 0) scale(1, 1);
+  transform: translate(-50%, 0) scale(1, 1);
+  opacity: 1;
+}
+
+.fade-exit-active {
+  -webkit-transform: translate(-50%, -100%) scale(1, 0);
+  transform: translate(-50%, -100%) scale(1, 0);
+  opacity: 0;
+  transition: opacity 300ms ease-out, -webkit-transform 500ms ease-in;
+  transition: transform 500ms ease-in, opacity 300ms ease-out;
+  transition: transform 500ms ease-in, opacity 300ms ease-out, -webkit-transform 500ms ease-in;
 }
